@@ -1,0 +1,31 @@
+doctype html
+html
+	head
+		title= 'MY Node'
+		script(type='text/javascript', src='/js/lib/jquery-1.8.3.min.js')
+		script(type="text/javascript", src="/js/login/login.js")
+		link(rel='stylesheet', href='/css/basic.css')
+		link(rel='stylesheet', href='/css/nanoscroller.css')
+		link(rel='stylesheet', href='/css/common.css')
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+	body
+	form(action="/login", method="POST")
+		.login_page
+			.header
+				h1
+					img(src='/img/cmm/logo_node.png')
+			.login_main
+				.user_info
+					p.tit
+						img(src='/img/login/img_login_title.png')
+					ul.cont
+						li
+							input(type='text', name='lgnId', id='lgnId', placeholder='User ID', value='ej8486.choi@github.com')
+						li
+							input(type='password', name='password', id='password', placeholder='Password', value='1234')
+						li.none
+							a.btn_login(href='#', name='loginBtn', id='loginBtn')
+								| Login
+						li.none
+							a.btn_login(href='#', name='loginBtn_g', id='loginBtn')
+								| Login in with Google

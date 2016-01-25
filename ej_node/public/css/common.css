@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+/* Alink */
+a{font-family:Arial, Helvetica, Nanum Gothic,Dotum, AppleGothic,sans-serif;}
+a:hover{font-family:Arial, Helvetica, Nanum Gothic,Dotum, AppleGothic,sans-serif;}
+body, input, textarea, button, label {font-family:Arial, Helvetica, Nanum Gothic,Dotum, AppleGothic,sans-serif;}
+
+/****************************************/
+/*	layout	*/
+/****************************************/
+body #wrap {position:relative;width:1250px; margin:auto;*zoom:1;font-size: 12px;background:url(/img/cmm/bg_left.gif) 0 0 repeat-y;}
+body #wrap .inner_wrap {position:relative;width:1250px; background:url(/img/cmm/bg_left.gif) 0 50px repeat-y;}
+body #wrap .inner_wrap:after {display:block; content:"";clear:both}
+*:first-child+html body #wrap .inner_wrap {display:inline;zoom:1;}/*ie7*/
+body #wrap .header_area {position:relative;height:55px;background:#fff; margin-left:10px;} 
+
+/* 로그인 페이지 기본 CSS */
+.login_page {}
+.login_page .header {width:1190px;margin:0 auto;padding:0 0 0 35px; background:#fff; height:50px;}
+.login_page .header:after {content:""; clear:both; display:block;}
+.login_page .header h1 {display:inline-block; font-size:1px}
+.login_page .header h1 a {display:inline-block; height:45px; line-height:45px}
+.login_page .header .btn_icon_set {float:right; margin-top:10px;}
+.login_cont {width:100%; height:100%;padding-top:10px; background:#fff url(/img/login/bg_login_header.png) top left repeat-x; text-align:center}
+.login_cont p.title {margin:45px 0 55px}
+.login_cont .login_name {width:100%; height:100%}
+.login_cont .login_name ul {width:100%; height:100%}
+.login_cont .login_name ul > li  {padding:19px 0; border-bottom:1px solid #edeef0; background:#f8f8f9; font-size:24px; color:#646672; line-height:24px; vertical-align:middle}
+.login_cont .login_name ul > li:first-child {border-top:1px solid #edeef0; border-bottom:none}
+.login_cont .login_name ul > li.even {background:#fff}
+.login_page .login_main {width:100%; height:100%;padding-top:10px; background:#fff url(/img/login/bg_login_header.png) top left repeat-x}
+.login_page .user_info {margin:214px auto; width:400px}
+.login_page .user_info .tit {margin-bottom:48px}
+.login_page .user_info .cont {margin:0 auto 30px; width:249px}
+.login_page .user_info .cont > li {margin-bottom:18px; padding-bottom:2px; background:url(/img/login/bg_input_gray.png) bottom right no-repeat}
+.login_page .user_info .cont > li.none {margin-top:0; background:none; margin-bottom:30px;}
+.login_page .user_info .cont input[type="text"] {padding:5px 0; width:245px; height:23px; border:1px solid #e7e7e7; color:#333366; font-size:14px; text-align:center; line-height:20px}
+.login_page .user_info .cont input[type="password"] {padding:5px 0; width:245px; height:23px; border:1px solid #e7e7e7; color:#333366; font-size:14px; text-align:center; line-height:20px}
+.login_page .user_info .btn_login {display:block; line-height:39px; background:#454964; font-size:14px; color:#fff; text-align:center;}
+.login_page .user_info .notice { font-size:12px; color:#7c7f8d; text-align:center}
+.login_page .user_info .cont .none {margin-top:8px;}
+.login_page .user_info .cont .fr {margin-top:-5px;*margin-top:-25px;}
+.login_page .user_info .cont .fr .select_inner .selcted {display:block; line-height:1.5; font-size:13px; vertical-align:middle; text-overflow:ellipsis;white-space:nowrap;}
+.login_page .user_info .cont .fr .select_inner .selcted02 em{display:block; padding:9px 8px; font-size:14px;  color:#454964; vertical-align:middle; text-align:center; text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+.login_page .user_info .cont .fr .select_inner .select_option {display:none; z-index:10; position:absolute; top:29px; left:0; width:100%; background:#fff; box-shadow:none;filter:progid:DXImageTransform.Microsoft.Shadow(color=#888888,direction=180, strength=3);}
+.login_page .user_info .cont .fr .select_inner  ul li {margin-bottom:0 !important; padding:8px; border:1px #e7e7e7 solid;border-top:none;font-size:12px;text-align:left;cursor:pointer;}
+.login_page .user_info .cont .fr .select_inner .select_option ul li:first-child {border-top:none;}
+.login_page .user_info .cont .fr .select_inner  #login_country_selecter li {border:none;}
+.login_page .user_info .cont > li.saveID {font-size:13px; color:#7c7f8d; margin-top:-15px; background:none;}
+.login_page .user_info > .btn_area  {margin:0 auto; width:251px; border-top:1px solid #e6e7e8; text-align:center; padding-top:10px;}
+.login_page .user_info > .btn_area a {margin-left:0;}
+.btn_join {display:inline-block; border-top:1px solid #f4f5f7; border-bottom:1px solid #4f526a; background:#606481; height:24px; line-height:24px; padding:0 12px; color:#fff; font-size:12px; margin:0 1px 0 0;}
