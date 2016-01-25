@@ -26,14 +26,17 @@ everyauth.google
 	.appSecret(GOOGLE_CONSUMER_SECRET)
 	.handleAuthCallbackError( function (req, res) {
 	})
-	.findOrCreateUser( function (session, accessToken, accessTokenSecret, googleUserMetadata) {
+	.scope('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email')
+	.findOrCreateUser( function (session, accessToken, accessTokenSecret, googleUser) {
+		console.log(googleUser);
 		var promise = this.Promise();
-		process.nextTick(function(){
-	        if (googleUserMetadata.screen_name === 'EJ') {
-	          session.user = googleUserMetadata;
+	    process.nextTick(function(){
+	    	session.user = googleUser;
+	    	
+	    	if (googleUser.email === 'ej8486.choi@gmail.com') {
 	          session.admin = true;
 	        }
-	        promise.fulfill(googleUserMetadata);
+	        promise.fulfill(googleUser);
 	    })
 	    return promise;
 	})
@@ -54,6 +57,21 @@ app.use(function(req, res, next) {
 	return next();
 });
 
+app.set('port', process.env.PORT || 3001);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+//Express.js middleware configuration
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-82131BDCB239'));
+app.use(session({secret: '2C44774A-D649-4D44-9535-46E296EF984F'}))
+app.use(everyauth.middleware());
+app.use(methodOverride());
+app.use(require('stylus').middleware(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 //Authentication middleware
 app.use(function(req, res, next) {
 	if (req.session && req.session.admin)
@@ -69,31 +87,38 @@ var authorize = function(req, res, next) {
     return res.send(401);
 };
 
-app.set('port', process.env.PORT || 3000);
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-82131BDCB239'));
-app.use(session({secret: '2C44774A-D649-4D44-9535-46E296EF984F'}))
-app.use(everyauth.middleware());
-app.use(methodOverride());
-app.use(require('stylus').middleware(__dirname + '/public'));
-app.use(express.static(path.join(__dirname, 'public')));
+//development only
+if ('development' == app.get('env')) {
+  app.use(errorHandler());
+}
 
 //Pages and routes
 app.get('/', routes.index);
 app.get('/login', routes.user.login);
 app.post('/login', routes.user.authenticate);
 app.get('/admin', routes.user.admin);
+app.get('/user', routes.user.user);
 
 app.all('*', function(req, res) {
   res.send(404);
 });
 
-http.createServer(app).listen(app.get('port'), function() {
-	console.log('Express server listening on port ' + app.get('port'));
-});
+var server = http.createServer(app);
+var boot = function () {
+  server.listen(app.get('port'), function(){
+    console.info('Express server listening on port ' + app.get('port'));
+  });
+}
 
+var shutdown = function() {
+  server.close();
+}
+
+if (require.main === module) {
+  boot();
+} else {
+  console.info('Running app as a module')
+  exports.boot = boot;
+  exports.shutdown = shutdown;
+  exports.port = app.get('port');
+}

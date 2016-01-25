@@ -14,14 +14,19 @@ body #wrap .inner_wrap:after {display:block; content:"";clear:both}
 *:first-child+html body #wrap .inner_wrap {display:inline;zoom:1;}/*ie7*/
 body #wrap .header_area {position:relative;height:55px;background:#fff; margin-left:10px;} 
 
+.header {width:1190px;margin:0 auto;padding:0 0 0 35px; background:#fff; height:50px;}
+.header:after {content:""; clear:both; display:block;}
+.header h1 {display:inline-block; font-size:1px}
+.header h1 a {display:inline-block; height:45px; line-height:45px}
+.header .btn_icon_set {float:right; margin-top:10px;}
+
+.footer {padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto;}
+
+.content_main {width:100%; height:100%;padding-top:100px; background:#fff url(/img/login/bg_login_header.png) top left repeat-x}
+
 /* 로그인 페이지 기본 CSS */
 .login_page {}
-.login_page .header {width:1190px;margin:0 auto;padding:0 0 0 35px; background:#fff; height:50px;}
-.login_page .header:after {content:""; clear:both; display:block;}
-.login_page .header h1 {display:inline-block; font-size:1px}
-.login_page .header h1 a {display:inline-block; height:45px; line-height:45px}
-.login_page .header .btn_icon_set {float:right; margin-top:10px;}
-.login_cont {width:100%; height:100%;padding-top:10px; background:#fff url(/img/login/bg_login_header.png) top left repeat-x; text-align:center}
+.login_cont {width:100%; height:100%;padding-top:50px; background:#fff url(/img/login/bg_login_header.png) top left repeat-x; text-align:center}
 .login_cont p.title {margin:45px 0 55px}
 .login_cont .login_name {width:100%; height:100%}
 .login_cont .login_name ul {width:100%; height:100%}

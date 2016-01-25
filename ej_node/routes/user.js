@@ -13,7 +13,15 @@ exports.list = function(req, res){
  */
 
 exports.login = function(req, res, next) {
-  res.render('login/login');
+	if (req.session.user != null) {
+		if (req.session.admin) {
+			res.redirect('/admin');
+		} else {
+			res.redirect('/user');
+		}
+	} else {
+		res.render('login/login');
+	}
 };
 
 /*
@@ -21,8 +29,10 @@ exports.login = function(req, res, next) {
  */
 
 exports.logout = function(req, res, next) {
-
-  res.redirect('/');
+	req.session.user = null;
+    req.session.admin = false;
+    
+	res.redirect('/login');
 };
 
 
@@ -33,12 +43,12 @@ exports.logout = function(req, res, next) {
 exports.authenticate = function(req, res, next) {
 	var loginFlag = false;
 	var adminFlag = false;
-	
+
 	if (!req.body.lgnId || !req.body.password) {
 		return res.render('login/login', {error: 'Please enter your email and password.'});
 	}
 	
-	req.collections.users.findOne({lgnid : req.body.lgnId}, function(error, user) {
+	req.collections.users.findOne({email : req.body.lgnId}, function(error, user) {
 		if (error) return next(error);
 		if (user) {
 			if (req.body.password == user.password) {
@@ -51,10 +61,9 @@ exports.authenticate = function(req, res, next) {
 			req.session.user = user;
 		    req.session.admin = adminFlag;
 		    console.log(adminFlag);
-		    res.send({loginFlag: loginFlag});
-		}
+		} 
+		res.send({loginFlag: loginFlag});
 	});
-	
 };
 
 exports.admin = function(req, res, next) {
@@ -63,4 +72,8 @@ exports.admin = function(req, res, next) {
 	} else {
 		res.redirect('/login');
 	}
+};
+
+exports.user = function(req, res, next) {
+	res.render('login/user');
 };

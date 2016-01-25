@@ -1,7 +1,7 @@
 $("#loginBtn").live("click", function() {
 	var lgnId = $('#lgnId').val();
 	var password = $('#password').val();
-
+	
 	$.ajax({
 		url			: "/login",
 	  	type		: "POST",
