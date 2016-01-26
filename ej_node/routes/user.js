@@ -14,11 +14,7 @@ exports.list = function(req, res){
 
 exports.login = function(req, res, next) {
 	if (req.session.user != null) {
-		if (req.session.admin) {
-			res.redirect('/admin');
-		} else {
-			res.redirect('/user');
-		}
+		res.redirect('/main');
 	} else {
 		res.render('login/login');
 	}
@@ -48,7 +44,7 @@ exports.authenticate = function(req, res, next) {
 		return res.render('login/login', {error: 'Please enter your email and password.'});
 	}
 	
-	req.collections.users.findOne({email : req.body.lgnId}, function(error, user) {
+	req.models.User.findOne({email : req.body.lgnId}, function(error, user) {
 		if (error) return next(error);
 		if (user) {
 			if (req.body.password == user.password) {
@@ -68,12 +64,30 @@ exports.authenticate = function(req, res, next) {
 
 exports.admin = function(req, res, next) {
 	if (req.session.admin) {
-		res.render('login/admin');
+		res.render('home/admin');
 	} else {
-		res.redirect('/login');
+		res.redirect('/main');
 	}
 };
 
 exports.user = function(req, res, next) {
-	res.render('login/user');
+	res.redirect('/main');
+};
+
+exports.register = function(req, res, next) {
+	var resultFlag = false;
+	
+	if (!req.body.user) return next(new Error('No User payload.'));
+	
+	var user = req.body.user;
+	
+	req.models.User.create(user, function(error, user) {
+		if (error) return next(error);
+		
+		if (user) {
+			resultFlag = true;
+		}
+		
+		res.send({resultFlag: resultFlag});
+	});
 };

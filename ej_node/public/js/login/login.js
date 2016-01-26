@@ -10,7 +10,7 @@ $("#loginBtn").live("click", function() {
 	  	async		: false,
 	  	success		: function(dataResponse, status, xhr) {
 	  		if (dataResponse.loginFlag == true) {
-	  			location.replace('/admin');
+	  			location.replace('/main');
 	  		} else {
 	  			alert(dataResponse.loginFlag);
 	  		}

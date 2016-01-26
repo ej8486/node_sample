@@ -1,4 +1,5 @@
 exports.user = require('./user');
+exports.home = require('./home');
 /*
  * GET home page.
  */

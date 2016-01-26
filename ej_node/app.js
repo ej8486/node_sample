@@ -5,12 +5,15 @@ var express = require('express'),
 	routes = require('./routes'),
 	http = require('http'),
 	path = require('path'),
-	mongoskin = require('mongoskin'),
+//	mongoskin = require('mongoskin'),
+	mongoose = require('mongoose'),
+	models = require('./models'),
 	dbUrl = process.env.MONGOHQ_URL || 'mongodb://@localhost:27017/mynode',
-	db = mongoskin.db(dbUrl, {safe: true}),
-	collections = {
-		users: db.collection('users')
-	},
+	db = mongoose.connect(dbUrl, {safe: true}),
+//	db = mongoskin.db(dbUrl, {safe: true}),
+//	collections = {
+//		users: db.collection('users')
+//	},
 	everyauth = require('everyauth');
 
 var session = require('express-session'),
@@ -51,13 +54,19 @@ everyauth.everymodule.findUserById( function (user, callback) {
 var app = express();
 app.set('appName', 'myNode');
 
+//app.use(function(req, res, next) {
+//	if (!collections.users) return next(new Error("No collections."))
+//		req.collections = collections;
+//	return next();
+//});
+
 app.use(function(req, res, next) {
-	if (!collections.users) return next(new Error("No collections."))
-		req.collections = collections;
+	if (!models.User) return next(new Error("No models."))
+		req.models = models;
 	return next();
 });
 
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -96,8 +105,10 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/login', routes.user.login);
 app.post('/login', routes.user.authenticate);
+app.get('/main', routes.home.main);
 app.get('/admin', routes.user.admin);
 app.get('/user', routes.user.user);
+app.post('/register', routes.user.register);
 
 app.all('*', function(req, res) {
   res.send(404);

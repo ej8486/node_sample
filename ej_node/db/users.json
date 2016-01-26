@@ -6,7 +6,8 @@
   link: 'https://plus.google.com/108741011060361384956',
   picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
   gender: 'female',
-  locale: 'en' },
+  locale: 'en',
+  admin:true},
  {email: 'sqsp27@gmail.com',
   password: '1234',
   name: 'Eunjung Choi',
@@ -15,5 +16,6 @@
   link: 'https://plus.google.com/108741011060361384956',
   picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
   gender: 'female',
-  locale: 'en' }
+  locale: 'en',
+  admin:false }
 ]

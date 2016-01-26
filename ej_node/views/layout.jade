@@ -3,22 +3,28 @@ html
     head
         title= 'MY Node'
         script(type='text/javascript', src='/js/lib/jquery-1.8.3.min.js')
-        script(type="text/javascript", src="/js/login/login.js")
+        script(type='text/javascript', src='/js/home/admin.js')
         link(rel='stylesheet', href='/css/basic.css')
         link(rel='stylesheet', href='/css/nanoscroller.css')
         link(rel='stylesheet', href='/css/common.css')
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    body
         block header
-            .header
-                h1
-                    img(src='/img/cmm/logo_node.png')
+    body
+        a(href='#' class='btnTop fr' id='TopForPaging' style='position:fixed; right:60px; bottom:47px; display: none; z-index: 49;')
+            span TOP
+        ul.skipnav
             li
-                a.btn_login(href='/logout', name='logoutBtn', id='logoutBtn')
-                    | Logout
-        block content
+                a(href='#nav' accesskey='1') Menu
+            li
+                a(href='#container' accesskey='2') Contents
+        div#wrap.nav_active
+            div.inner_wrap
+                h1
+                    span.blind
+                        | SITE WLC
+                header.header_area
+                    include ./home/header.jade
+                include ./home/menu.jade
+                #container
+                    .content    
+                        block content
         block footer
-            .footer
-                | Copyright &copy; 2016 |
-                a(href="https://github.com/ej8486/") GitHub
-                | .
