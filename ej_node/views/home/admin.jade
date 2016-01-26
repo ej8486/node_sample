@@ -1,0 +1,15 @@
+extends ../layout
+block content
+    .content_main
+        h1 hello Admin
+        p= admin
+        ul.cont
+            li
+                input(type='text', name='email', id='email', placeholder='Email', value='sbobej@gmail.com')
+            li
+                input(type='password', name='password', id='password', placeholder='Password', value='1234')
+            li
+                input(type='text', name='name', id='name', placeholder='Name', value='BOB')
+            li.none
+                a.btn_login(href='#', name='registerBtn', id='registerBtn')
+                    | Register
